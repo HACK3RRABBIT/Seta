@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% block title %}My Timetable{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-calendar-alt"></i> My Timetable</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary" onclick="printTimetable()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="exportTimetable()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+            </div>
+
+            <!-- Timetable Summary -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <i class="fas fa-book"></i>
+                                Total Courses
+                            </h5>
+                            <h3>{{ timetable_data.total_courses }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <i class="fas fa-clock"></i>
+                                Total Credits
+                            </h5>
+                            <h3>{{ timetable_data.total_credits }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <i class="fas fa-calendar"></i>
+                                Days per Week
+                            </h5>
+                            <h3>{{ timetable_data.days_per_week }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card {% if timetable_data.conflicts %}bg-danger{% else %}bg-success{% endif %} text-white">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Conflicts
+                            </h5>
+                            <h3>{{ timetable_data.conflicts|length }}</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Conflict Alerts -->
+            {% if timetable_data.conflicts %}
+            <div class="alert alert-danger mb-4">
+                <h5><i class="fas fa-exclamation-triangle"></i> Schedule Conflicts Detected</h5>
+                <p class="mb-0">The following courses have scheduling conflicts:</p>
+                <ul class="mb-0 mt-2">
+                    {% for conflict in timetable_data.conflicts %}
+                    <li><strong>{{ conflict.course1 }}</strong> conflicts with <strong>{{ conflict.course2 }}</strong> on {{ conflict.day }} at {{ conflict.time }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <!-- Weekly Timetable -->
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-calendar-week"></i>
+                        Weekly Schedule
+                    </h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-0 timetable-table">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th style="width: 100px;">Time</th>
+                                    <th>Monday</th>
+                                    <th>Tuesday</th>
+                                    <th>Wednesday</th>
+                                    <th>Thursday</th>
+                                    <th>Friday</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for time_slot in timetable_data.time_slots %}
+                                <tr>
+                                    <td class="time-slot">
+                                        <strong>{{ time_slot }}</strong>
+                                    </td>
+                                    {% for day in ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'] %}
+                                    <td class="day-cell">
+                                        {% set day_courses = timetable_data.schedule.get(day, {}).get(time_slot, []) %}
+                                        {% for course in day_courses %}
+                                                                                 <div class="course-slot {% if course.has_conflict %}conflict{% endif %}" 
+                                              data-course="{{ course.course_id }}" 
+                                              data-toggle="tooltip" 
+                                              title="{{ course.name }} - {{ course.instructor }}">
+                                             <div class="course-header">
+                                                 <strong>{{ course.course_id }}</strong>
+                                                {% if course.has_conflict %}
+                                                <i class="fas fa-exclamation-triangle text-danger"></i>
+                                                {% endif %}
+                                            </div>
+                                            <div class="course-details">
+                                                <small>{{ course.name }}</small><br>
+                                                <small class="text-muted">{{ course.instructor }}</small><br>
+                                                <small class="text-muted">{{ course.schedule.room }}</small>
+                                            </div>
+                                        </div>
+                                        {% endfor %}
+                                    </td>
+                                    {% endfor %}
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Course List -->
+            <div class="row mt-4">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list"></i>
+                                Enrolled Courses
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Course ID</th>
+                                            <th>Course Name</th>
+                                            <th>Instructor</th>
+                                            <th>Schedule</th>
+                                            <th>Credits</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for course in timetable_data.enrolled_courses %}
+                                        <tr {% if course.has_conflict %}class="table-warning"{% endif %}>
+                                            <td><strong>{{ course.course_id }}</strong></td>
+                                            <td>{{ course.name }}</td>
+                                            <td>{{ course.instructor }}</td>
+                                            <td>
+                                                {{ course.schedule.days|join(', ') }}<br>
+                                                <small class="text-muted">{{ course.schedule.time }} - {{ course.schedule.room }}</small>
+                                            </td>
+                                            <td>{{ course.credits }}</td>
+                                            <td>
+                                                {% if course.has_conflict %}
+                                                <span class="badge bg-danger">
+                                                    <i class="fas fa-exclamation-triangle"></i> Conflict
+                                                </span>
+                                                {% else %}
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check"></i> OK
+                                                </span>
+                                                {% endif %}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-chart-pie"></i>
+                                Summary
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6>Academic Progress</h6>
+                                <div class="progress mb-2">
+                                    <div class="progress-bar" role="progressbar" 
+                                         style="width: {{ (timetable_data.total_credits / 120 * 100)|round }}%">
+                                        {{ timetable_data.total_credits }}/120 Credits
+                                    </div>
+                                </div>
+                                <small class="text-muted">Progress toward graduation (120 credits required)</small>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Schedule Distribution</h6>
+                                <div class="row text-center">
+                                    <div class="col-6">
+                                        <div class="border rounded p-2">
+                                            <h6 class="mb-0">{{ timetable_data.morning_courses }}</h6>
+                                            <small class="text-muted">Morning</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="border rounded p-2">
+                                            <h6 class="mb-0">{{ timetable_data.afternoon_courses }}</h6>
+                                            <small class="text-muted">Afternoon</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <h6>Important Dates</h6>
+                                <ul class="list-unstyled">
+                                    <li class="mb-2">
+                                        <small class="text-muted">Add/Drop Deadline</small><br>
+                                        <strong>September 15, 2024</strong>
+                                    </li>
+                                    <li class="mb-2">
+                                        <small class="text-muted">Midterm Week</small><br>
+                                        <strong>October 15-19, 2024</strong>
+                                    </li>
+                                    <li class="mb-2">
+                                        <small class="text-muted">Final Exams</small><br>
+                                        <strong>December 10-14, 2024</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function printTimetable() {
+    window.print();
+}
+
+function exportTimetable() {
+    // Create a simple CSV export
+    let csv = 'Course ID,Course Name,Instructor,Schedule,Credits,Status\n';
+    
+    const courses = {{ timetable_data.enrolled_courses|tojson }};
+    courses.forEach(course => {
+        const schedule = course.schedule.days.join(', ') + ' ' + course.schedule.time;
+        const status = course.has_conflict ? 'Conflict' : 'OK';
+        csv += `"${course.course_id}","${course.name}","${course.instructor}","${schedule}",${course.credits},"${status}"\n`;
+    });
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'timetable.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+// Initialize tooltips
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+
+<style>
+.timetable-table {
+    font-size: 0.875rem;
+}
+
+.time-slot {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.day-cell {
+    padding: 0.5rem;
+    min-height: 80px;
+    vertical-align: top;
+}
+
+.course-slot {
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.course-slot:hover {
+    transform: scale(1.02);
+}
+
+.course-slot.conflict {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    border: 2px solid #ffc107;
+}
+
+.course-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.25rem;
+}
+
+.course-details small {
+    display: block;
+    line-height: 1.2;
+}
+
+@media print {
+    .btn, .alert {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+    }
+    
+    .timetable-table {
+        font-size: 0.75rem;
+    }
+}
+</style>
+{% endblock %} 

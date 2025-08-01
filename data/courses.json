@@ -1,0 +1,131 @@
+{
+  "courses": [
+    {
+      "course_id": "CS101",
+      "name": "Introduction to Computer Science",
+      "description": "Basic programming concepts and problem solving",
+      "credits": 3,
+      "instructor": "Dr. Smith",
+      "capacity": 30,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Monday",
+          "Wednesday"
+        ],
+        "time": "10:00-11:30",
+        "room": "Room 101"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:09:27.030570"
+    },
+    {
+      "course_id": "CS201",
+      "name": "Data Structures",
+      "description": "Advanced programming concepts and data structures",
+      "credits": 3,
+      "instructor": "Dr. Johnson",
+      "capacity": 25,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Thursday"
+        ],
+        "time": "13:00-14:30",
+        "room": "Room 102"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:03:43.086741"
+    },
+    {
+      "course_id": "MATH101",
+      "name": "Calculus I",
+      "description": "Introduction to calculus and mathematical analysis",
+      "credits": 4,
+      "instructor": "Dr. Brown",
+      "capacity": 35,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Monday",
+          "Wednesday",
+          "Friday"
+        ],
+        "time": "08:00-09:30",
+        "room": "Room 201"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:03:43.086741"
+    },
+    {
+      "course_id": "ENG101",
+      "name": "English Composition",
+      "description": "Writing and communication skills",
+      "credits": 3,
+      "instructor": "Dr. Davis",
+      "capacity": 40,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Thursday"
+        ],
+        "time": "15:00-16:30",
+        "room": "Room 103"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:03:43.086741"
+    },
+    {
+      "course_id": "PHYS101",
+      "name": "Physics I",
+      "description": "Introduction to classical mechanics",
+      "credits": 4,
+      "instructor": "Dr. Wilson",
+      "capacity": 30,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Monday",
+          "Wednesday"
+        ],
+        "time": "13:00-14:30",
+        "room": "Lab 101"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:03:43.086741"
+    },
+    {
+      "course_id": "CHEM101",
+      "name": "General Chemistry",
+      "description": "Fundamental chemistry concepts",
+      "credits": 4,
+      "instructor": "Dr. Anderson",
+      "capacity": 35,
+      "enrolled": 0,
+      "prerequisites": [],
+      "schedule": {
+        "days": [
+          "Tuesday",
+          "Thursday"
+        ],
+        "time": "10:00-11:30",
+        "room": "Lab 102"
+      },
+      "is_active": true,
+      "created_at": "2025-08-01T22:03:43.086741",
+      "updated_at": "2025-08-01T22:03:43.086741"
+    }
+  ]
+}

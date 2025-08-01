@@ -1,0 +1,290 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Smart Course Registration Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Welcome Section -->
+    <div class="col-12">
+        <div class="card bg-primary text-white mb-4">
+            <div class="card-body">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2 class="mb-2">
+                            <i class="fas fa-user-graduate me-2"></i>
+                            Welcome back, {{ user.username }}!
+                        </h2>
+                        <p class="mb-0">
+                            Student ID: {{ dashboard_data.student_id }} | 
+                            Major: {{ dashboard_data.major }}
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="h4 mb-0">{{ dashboard_data.enrolled_courses_count }}</div>
+                        <small>Enrolled Courses</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Statistics Cards -->
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-primary shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Total Credits
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ dashboard_data.total_credits }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-success shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                            Enrolled Courses
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            {{ dashboard_data.enrolled_courses_count }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-book fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-4">
+        <div class="card border-left-info shadow h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            GPA (Estimated)
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                            3.85
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-chart-line fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Enrolled Courses -->
+    <div class="col-lg-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-book me-2"></i>My Enrolled Courses
+                </h6>
+                <a href="{{ url_for('student.courses') }}" class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus me-1"></i>Browse More Courses
+                </a>
+            </div>
+            <div class="card-body">
+                {% if dashboard_data.enrolled_courses %}
+                    <div class="table-responsive">
+                        <table class="table table-bordered" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Course ID</th>
+                                    <th>Course Name</th>
+                                    <th>Instructor</th>
+                                    <th>Credits</th>
+                                    <th>Schedule</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for course in dashboard_data.enrolled_courses %}
+                                <tr>
+                                    <td>{{ course.course_id }}</td>
+                                    <td>
+                                        <strong>{{ course.name }}</strong>
+                                        <br><small class="text-muted">{{ course.description[:50] }}...</small>
+                                    </td>
+                                    <td>{{ course.instructor }}</td>
+                                    <td>{{ course.credits }}</td>
+                                    <td>
+                                        {% if course.schedule %}
+                                            <small>
+                                                {{ course.schedule.days|join(', ') }}<br>
+                                                {{ course.schedule.time }}<br>
+                                                {{ course.schedule.room }}
+                                            </small>
+                                        {% else %}
+                                            <span class="text-muted">TBD</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="{{ url_for('student.drop_course', course_id=course.course_id) }}" 
+                                              style="display: inline;">
+                                            <button type="submit" class="btn btn-sm btn-danger" 
+                                                    onclick="return confirm('Are you sure you want to drop this course?')">
+                                                <i class="fas fa-times"></i> Drop
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% else %}
+                    <div class="text-center py-4">
+                        <i class="fas fa-book-open fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No courses enrolled yet</h5>
+                        <p class="text-muted">Start by browsing available courses and enrolling in the ones you're interested in.</p>
+                        <a href="{{ url_for('student.courses') }}" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>Browse Courses
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions & Info -->
+    <div class="col-lg-4">
+        <!-- Quick Actions -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-bolt me-2"></i>Quick Actions
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <a href="{{ url_for('student.courses') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-search me-2"></i>Browse Courses
+                    </a>
+                    <a href="{{ url_for('student.timetable') }}" class="btn btn-outline-info">
+                        <i class="fas fa-calendar me-2"></i>View Timetable
+                    </a>
+                    <a href="#" class="btn btn-outline-success">
+                        <i class="fas fa-download me-2"></i>Download Schedule
+                    </a>
+                    <a href="#" class="btn btn-outline-warning">
+                        <i class="fas fa-print me-2"></i>Print Schedule
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Academic Progress -->
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-chart-pie me-2"></i>Academic Progress
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Credits Completed</span>
+                        <span>{{ dashboard_data.total_credits }}/120</span>
+                    </div>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" 
+                             style="width: {{ (dashboard_data.total_credits / 120 * 100)|round }}%">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Current Semester</span>
+                        <span>Fall 2024</span>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Academic Standing</span>
+                        <span class="badge bg-success">Good Standing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Important Dates -->
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                    <i class="fas fa-calendar-alt me-2"></i>Important Dates
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <small class="text-muted">Course Registration Deadline</small><br>
+                        <strong>September 15, 2024</strong>
+                    </li>
+                    <li class="mb-2">
+                        <small class="text-muted">Drop/Add Period Ends</small><br>
+                        <strong>September 30, 2024</strong>
+                    </li>
+                    <li class="mb-2">
+                        <small class="text-muted">Midterm Exams</small><br>
+                        <strong>October 15-20, 2024</strong>
+                    </li>
+                    <li class="mb-2">
+                        <small class="text-muted">Final Exams</small><br>
+                        <strong>December 10-15, 2024</strong>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add some interactivity
+    const progressBar = document.querySelector('.progress-bar');
+    if (progressBar) {
+        const width = progressBar.style.width;
+        progressBar.style.width = '0%';
+        setTimeout(() => {
+            progressBar.style.width = width;
+        }, 500);
+    }
+    
+    // Add hover effects to course rows
+    const courseRows = document.querySelectorAll('tbody tr');
+    courseRows.forEach(row => {
+        row.addEventListener('mouseenter', function() {
+            this.classList.add('table-hover');
+        });
+        row.addEventListener('mouseleave', function() {
+            this.classList.remove('table-hover');
+        });
+    });
+});
+</script>
+{% endblock %} 

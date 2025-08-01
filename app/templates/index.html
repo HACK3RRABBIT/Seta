@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Course Registration Portal{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+            <!-- Hero Section -->
+            <div class="hero-section mb-5">
+                <h1 class="display-4 text-primary mb-3">
+                    <i class="fas fa-graduation-cap"></i>
+                    Smart Course Registration Portal
+                </h1>
+                <p class="lead text-muted">
+                    A lightweight, systematic course-registration system for universities and educational institutions.
+                </p>
+                <div class="badge bg-success fs-6 mb-4">
+                    <i class="fas fa-check-circle"></i>
+                    Advanced OOP Principles • Flask Web Framework • JSON Data Storage
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                        <h5>User Management</h5>
+                        <p class="text-muted">Student and administrator registration with role-based access control.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-book fa-3x text-primary mb-3"></i>
+                        <h5>Course Registration</h5>
+                        <p class="text-muted">Browse courses, enroll, and manage your academic schedule.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="feature-card">
+                        <i class="fas fa-calendar-alt fa-3x text-primary mb-3"></i>
+                        <h5>Conflict Detection</h5>
+                        <p class="text-muted">Automatic schedule conflict detection and timetable generation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card shadow-sm">
+                        <div class="card-body p-4">
+                            <h4 class="card-title text-center mb-4">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Get Started
+                            </h4>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <a href="{{ url_for('auth.login') }}" class="btn btn-primary btn-lg w-100">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        Login
+                                    </a>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <a href="{{ url_for('auth.register') }}" class="btn btn-outline-primary btn-lg w-100">
+                                        <i class="fas fa-user-plus"></i>
+                                        Register
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!-- Demo Credentials -->
+                            <div class="mt-4">
+                                <h6 class="text-muted mb-3">
+                                    <i class="fas fa-info-circle"></i>
+                                    Demo Credentials
+                                </h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="demo-credential">
+                                            <strong>Student Account:</strong><br>
+                                            <small class="text-muted">username: student1<br>password: password123</small>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="demo-credential">
+                                            <strong>Admin Account:</strong><br>
+                                            <small class="text-muted">username: admin<br>password: admin123</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Information -->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card bg-light">
+                        <div class="card-body text-center">
+                            <h6 class="text-muted mb-2">
+                                <i class="fas fa-cogs"></i>
+                                System Information
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-code"></i> Python Flask
+                                    </small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-database"></i> JSON Storage
+                                    </small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-shield-alt"></i> Secure Auth
+                                    </small>
+                                </div>
+                                <div class="col-md-3">
+                                    <small class="text-muted">
+                                        <i class="fas fa-mobile-alt"></i> Responsive
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hero-section {
+    padding: 2rem 0;
+}
+
+.feature-card {
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.demo-credential {
+    background: #f8f9fa;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    border: 1px solid #dee2e6;
+}
+
+.card {
+    border: none;
+    border-radius: 1rem;
+}
+
+.btn {
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.badge {
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+}
+</style>
+{% endblock %} 

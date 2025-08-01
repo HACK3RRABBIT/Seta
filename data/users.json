@@ -1,0 +1,66 @@
+{
+  "users": [
+    {
+      "id": "85967af1-a624-483e-b838-a199d7d6004e",
+      "username": "student1",
+      "email": "student1@university.edu",
+      "password_hash": "$2b$12$OqsNUi6VSq1Pv6OcNnoKSebuY5hmJqZaHdu6pkcsVFuVpYtiBi4OS",
+      "role": "student",
+      "created_at": "2025-08-01T22:03:42.475285",
+      "is_active": true,
+      "student_id": "STU001",
+      "major": "Computer Science",
+      "enrolled_courses": [],
+      "completed_courses": [],
+      "total_credits": 0
+    },
+    {
+      "id": "4df09094-898c-4705-a0e0-0a54dce7972a",
+      "username": "student2",
+      "email": "student2@university.edu",
+      "password_hash": "$2b$12$E0QuR2Wb34eL9r3dnWvox.zPseOaZvg7Xzt9DWPM5l8sWzGRjOzJi",
+      "role": "student",
+      "created_at": "2025-08-01T22:03:42.678463",
+      "is_active": true,
+      "student_id": "STU002",
+      "major": "Mathematics",
+      "enrolled_courses": [],
+      "completed_courses": [],
+      "total_credits": 0
+    },
+    {
+      "id": "cdf7e060-d3ef-444b-aae6-195e86967c48",
+      "username": "admin",
+      "email": "admin@university.edu",
+      "password_hash": "$2b$12$cLqaL71ljX3F7D4At3EVcuLfCMVllPhQ.DYwppT0iccetTecJJNBK",
+      "role": "administrator",
+      "created_at": "2025-08-01T22:03:42.880424",
+      "is_active": true,
+      "admin_level": "super",
+      "permissions": [
+        "view_reports",
+        "manage_courses",
+        "manage_users",
+        "system_settings",
+        "delete_data"
+      ],
+      "last_login": "2025-08-01T22:14:58.604203"
+    },
+    {
+      "id": "3c103447-2945-4612-9e51-a07c1e39d5e6",
+      "username": "admin2",
+      "email": "admin2@university.edu",
+      "password_hash": "$2b$12$R90l5ARoxqScnRrL69tC5.or1QDs/JDy9n6w3UqS5020ReShs/FFu",
+      "role": "administrator",
+      "created_at": "2025-08-01T22:03:43.086741",
+      "is_active": true,
+      "admin_level": "standard",
+      "permissions": [
+        "view_reports",
+        "manage_courses",
+        "manage_users"
+      ],
+      "last_login": null
+    }
+  ]
+}

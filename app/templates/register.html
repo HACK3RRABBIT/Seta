@@ -1,0 +1,229 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Smart Course Registration Portal{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow-lg">
+            <div class="card-header bg-success text-white text-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-user-plus me-2"></i>Create Account
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST" action="{{ url_for('auth.register') }}" id="registerForm">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">
+                                    <i class="fas fa-user me-1"></i>Username *
+                                </label>
+                                <input type="text" class="form-control" id="username" name="username" 
+                                       required minlength="3" maxlength="50">
+                                <div class="form-text">Username must be 3-50 characters long.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">
+                                    <i class="fas fa-envelope me-1"></i>Email *
+                                </label>
+                                <input type="email" class="form-control" id="email" name="email" 
+                                       required>
+                                <div class="form-text">Enter a valid email address.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="password" class="form-label">
+                                    <i class="fas fa-lock me-1"></i>Password *
+                                </label>
+                                <input type="password" class="form-control" id="password" name="password" 
+                                       required minlength="8">
+                                <div class="form-text">Password must be at least 8 characters long.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="confirm_password" class="form-label">
+                                    <i class="fas fa-lock me-1"></i>Confirm Password *
+                                </label>
+                                <input type="password" class="form-control" id="confirm_password" 
+                                       name="confirm_password" required>
+                                <div class="form-text">Re-enter your password.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="role" class="form-label">
+                            <i class="fas fa-user-tag me-1"></i>Role *
+                        </label>
+                        <select class="form-select" id="role" name="role" required>
+                            <option value="">Select your role</option>
+                            <option value="student">Student</option>
+                            <option value="administrator">Administrator</option>
+                        </select>
+                        <div class="form-text">Choose your role in the system.</div>
+                    </div>
+                    
+                    <!-- Student-specific fields -->
+                    <div id="studentFields" class="row" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="student_id" class="form-label">
+                                    <i class="fas fa-id-card me-1"></i>Student ID
+                                </label>
+                                <input type="text" class="form-control" id="student_id" name="student_id">
+                                <div class="form-text">Optional: Enter your student ID.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="major" class="form-label">
+                                    <i class="fas fa-graduation-cap me-1"></i>Major
+                                </label>
+                                <input type="text" class="form-control" id="major" name="major" 
+                                       value="Undecided">
+                                <div class="form-text">Your field of study.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin-specific fields -->
+                    <div id="adminFields" class="row" style="display: none;">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="admin_level" class="form-label">
+                                    <i class="fas fa-shield-alt me-1"></i>Admin Level
+                                </label>
+                                <select class="form-select" id="admin_level" name="admin_level">
+                                    <option value="standard">Standard</option>
+                                    <option value="super">Super Admin</option>
+                                </select>
+                                <div class="form-text">Choose admin privileges level.</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="terms" name="terms" required>
+                        <label class="form-check-label" for="terms">
+                            I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and 
+                            <a href="#" class="text-decoration-none">Privacy Policy</a> *
+                        </label>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="fas fa-user-plus me-2"></i>Create Account
+                        </button>
+                    </div>
+                </form>
+                
+                <hr class="my-4">
+                
+                <div class="text-center">
+                    <p class="text-muted mb-2">Already have an account?</p>
+                    <a href="{{ url_for('auth.login') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>Login Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registerForm');
+    const roleSelect = document.getElementById('role');
+    const studentFields = document.getElementById('studentFields');
+    const adminFields = document.getElementById('adminFields');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirm_password');
+    
+    // Show/hide role-specific fields
+    roleSelect.addEventListener('change', function() {
+        const role = this.value;
+        
+        if (role === 'student') {
+            studentFields.style.display = 'block';
+            adminFields.style.display = 'none';
+        } else if (role === 'administrator') {
+            studentFields.style.display = 'none';
+            adminFields.style.display = 'block';
+        } else {
+            studentFields.style.display = 'none';
+            adminFields.style.display = 'none';
+        }
+    });
+    
+    // Password confirmation validation
+    function validatePasswordMatch() {
+        const password = passwordInput.value;
+        const confirmPassword = confirmPasswordInput.value;
+        
+        if (confirmPassword && password !== confirmPassword) {
+            confirmPasswordInput.setCustomValidity('Passwords do not match');
+        } else {
+            confirmPasswordInput.setCustomValidity('');
+        }
+    }
+    
+    passwordInput.addEventListener('input', validatePasswordMatch);
+    confirmPasswordInput.addEventListener('input', validatePasswordMatch);
+    
+    // Form validation
+    form.addEventListener('submit', function(e) {
+        let isValid = true;
+        
+        // Clear previous error states
+        const inputs = form.querySelectorAll('input, select');
+        inputs.forEach(input => input.classList.remove('is-invalid'));
+        
+        // Validate required fields
+        const requiredFields = form.querySelectorAll('[required]');
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                field.classList.add('is-invalid');
+                isValid = false;
+            }
+        });
+        
+        // Validate password length
+        if (passwordInput.value.length < 8) {
+            passwordInput.classList.add('is-invalid');
+            isValid = false;
+        }
+        
+        // Validate password match
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordInput.classList.add('is-invalid');
+            isValid = false;
+        }
+        
+        // Validate email format
+        const emailInput = document.getElementById('email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (emailInput.value && !emailRegex.test(emailInput.value)) {
+            emailInput.classList.add('is-invalid');
+            isValid = false;
+        }
+        
+        if (!isValid) {
+            e.preventDefault();
+        }
+    });
+    
+    // Auto-focus username field
+    document.getElementById('username').focus();
+});
+</script>
+{% endblock %} 

@@ -1,0 +1,54 @@
+{
+  "registrations": [
+    {
+      "registration_id": "be15dec5-54f8-4935-b468-b5fcd0251ac1",
+      "student_id": "STU001",
+      "course_id": "CS101",
+      "status": "enrolled",
+      "enrollment_date": "2025-08-01T22:03:43.086741",
+      "drop_date": null,
+      "grade": null,
+      "notes": ""
+    },
+    {
+      "registration_id": "cdcdbf0b-c20e-43f4-a5cb-19bac799f1e5",
+      "student_id": "STU001",
+      "course_id": "MATH101",
+      "status": "enrolled",
+      "enrollment_date": "2025-08-01T22:03:43.086741",
+      "drop_date": null,
+      "grade": null,
+      "notes": ""
+    },
+    {
+      "registration_id": "031938ad-16b4-44a2-aa40-58607e866d81",
+      "student_id": "STU002",
+      "course_id": "CS101",
+      "status": "enrolled",
+      "enrollment_date": "2025-08-01T22:03:43.086741",
+      "drop_date": null,
+      "grade": null,
+      "notes": ""
+    },
+    {
+      "registration_id": "d1b9fa95-2ff1-46ad-a2d5-78d8c43d1573",
+      "student_id": "STU002",
+      "course_id": "ENG101",
+      "status": "enrolled",
+      "enrollment_date": "2025-08-01T22:03:43.086741",
+      "drop_date": null,
+      "grade": null,
+      "notes": ""
+    },
+    {
+      "registration_id": "159aaa61-962e-4345-b45b-d5e613d9ea33",
+      "student_id": "85967af1-a624-483e-b838-a199d7d6004e",
+      "course_id": "CS101",
+      "status": "enrolled",
+      "enrollment_date": "2025-08-01T22:09:22.992563",
+      "drop_date": null,
+      "grade": null,
+      "notes": ""
+    }
+  ]
+}

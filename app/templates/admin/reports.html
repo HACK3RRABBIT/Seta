@@ -1,0 +1,313 @@
+{% extends "base.html" %}
+
+{% block title %}System Reports{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-chart-bar"></i> System Reports</h2>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-outline-primary" onclick="exportReports()">
+                        <i class="fas fa-download"></i> Export All
+                    </button>
+                    <button class="btn btn-outline-secondary" onclick="printReports()">
+                        <i class="fas fa-print"></i> Print
+                    </button>
+                </div>
+            </div>
+
+            <!-- Report Summary -->
+            <div class="row mb-4">
+                <div class="col-md-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body text-center">
+                            <h5>Total Reports</h5>
+                            <h3>{{ reports|length }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body text-center">
+                            <h5>Active Users</h5>
+                            <h3>{{ reports.user_stats.active_users }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-info text-white">
+                        <div class="card-body text-center">
+                            <h5>Total Enrollments</h5>
+                            <h3>{{ reports.enrollment_stats.total_enrollments }}</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body text-center">
+                            <h5>System Health</h5>
+                            <h3>{{ reports.system_health.score }}%</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reports Grid -->
+            <div class="row">
+                <!-- User Statistics Report -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-users"></i>
+                                User Statistics
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Users</td>
+                                            <td><strong>{{ reports.user_stats.total_users }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Students</td>
+                                            <td><strong>{{ reports.user_stats.students }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Administrators</td>
+                                            <td><strong>{{ reports.user_stats.administrators }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Active Sessions</td>
+                                            <td><strong>{{ reports.user_stats.active_sessions }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Users Today</td>
+                                            <td><strong>{{ reports.user_stats.new_users_today }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enrollment Statistics Report -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-graduation-cap"></i>
+                                Enrollment Statistics
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Enrollments</td>
+                                            <td><strong>{{ reports.enrollment_stats.total_enrollments }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Active Enrollments</td>
+                                            <td><strong>{{ reports.enrollment_stats.active_enrollments }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Average Enrollments per Course</td>
+                                            <td><strong>{{ reports.enrollment_stats.avg_enrollments_per_course }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Most Popular Course</td>
+                                            <td><strong>{{ reports.enrollment_stats.most_popular_course }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>New Enrollments Today</td>
+                                            <td><strong>{{ reports.enrollment_stats.new_enrollments_today }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Statistics Report -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-book"></i>
+                                Course Statistics
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>Total Courses</td>
+                                            <td><strong>{{ reports.course_stats.total_courses }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Available Courses</td>
+                                            <td><strong>{{ reports.course_stats.available_courses }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Full Courses</td>
+                                            <td><strong>{{ reports.course_stats.full_courses }}</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Average Capacity Utilization</td>
+                                            <td><strong>{{ reports.course_stats.avg_capacity_utilization }}%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Total Credits Offered</td>
+                                            <td><strong>{{ reports.course_stats.total_credits_offered }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Health Report -->
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-heartbeat"></i>
+                                System Health
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-sm">
+                                    <tbody>
+                                        <tr>
+                                            <td>System Score</td>
+                                            <td><strong>{{ reports.system_health.score }}%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Uptime</td>
+                                            <td><strong>{{ reports.system_health.uptime }}%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Data Integrity</td>
+                                            <td><strong>{{ reports.system_health.data_integrity }}%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Performance</td>
+                                            <td><strong>{{ reports.system_health.performance }}%</strong></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Backup</td>
+                                            <td><strong>{{ reports.system_health.last_backup }}</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Detailed Reports -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="mb-0">
+                                <i class="fas fa-list"></i>
+                                Detailed Reports
+                            </h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Report Name</th>
+                                            <th>Description</th>
+                                            <th>Last Updated</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for report in reports.detailed_reports %}
+                                        <tr>
+                                            <td><strong>{{ report.name }}</strong></td>
+                                            <td>{{ report.description }}</td>
+                                            <td><small class="text-muted">{{ report.last_updated }}</small></td>
+                                            <td>
+                                                <div class="btn-group" role="group">
+                                                    <button class="btn btn-sm btn-outline-primary" onclick="viewReport('{{ report.id }}')">
+                                                        <i class="fas fa-eye"></i> View
+                                                    </button>
+                                                    <button class="btn btn-sm btn-outline-secondary" onclick="exportReport('{{ report.id }}')">
+                                                        <i class="fas fa-download"></i> Export
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function exportReports() {
+    // Create a comprehensive CSV export
+    let csv = 'Report Type,Value\n';
+    csv += 'Total Users,' + document.querySelector('.bg-primary h3').textContent + '\n';
+    csv += 'Active Users,' + document.querySelector('.bg-success h3').textContent + '\n';
+    csv += 'Total Enrollments,' + document.querySelector('.bg-info h3').textContent + '\n';
+    csv += 'System Health,' + document.querySelector('.bg-warning h3').textContent + '\n';
+    
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'system_reports.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+}
+
+function printReports() {
+    window.print();
+}
+
+function viewReport(reportId) {
+    alert('View report ' + reportId + ' - Feature coming soon!');
+}
+
+function exportReport(reportId) {
+    alert('Export report ' + reportId + ' - Feature coming soon!');
+}
+</script>
+
+<style>
+@media print {
+    .btn, .d-flex {
+        display: none !important;
+    }
+    
+    .card {
+        border: 1px solid #000 !important;
+        break-inside: avoid;
+    }
+}
+</style>
+{% endblock %} 

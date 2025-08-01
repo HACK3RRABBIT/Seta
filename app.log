@@ -1,0 +1,62 @@
+ 2025-08-01 22:11:53,594 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:11:53,651 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:11:53,998 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:11:54,011 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:11:56,078 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:11:56,110 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:11:56,441 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:11:56,447 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:18,021 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:18,055 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:18,431 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:18,436 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:23,561 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:23,604 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:23,961 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:23,961 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:27,047 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:27,081 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:27,446 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:27,461 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:30,545 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:30,578 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:30,979 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:30,984 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:41,199 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:41,239 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:41,595 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:41,619 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:53,913 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:53,947 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:54,291 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:54,291 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:12:56,364 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:12:56,397 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:12:56,732 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:12:56,739 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:13:01,849 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:13:01,886 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:13:02,224 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:13:02,230 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:13:09,378 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:13:09,413 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:13:09,761 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:13:09,767 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:13:16,909 - werkzeug - INFO -  * Detected change in 'D:\\python\\Seta\\app\\routes.py', reloading
+2025-08-01 22:13:16,951 - werkzeug - INFO -  * Restarting with stat
+2025-08-01 22:13:17,321 - werkzeug - WARNING -  * Debugger is active!
+2025-08-01 22:13:17,327 - werkzeug - INFO -  * Debugger PIN: 755-022-915
+2025-08-01 22:14:46,481 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:46] "GET / HTTP/1.1" 200 -
+2025-08-01 22:14:46,569 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:46] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-01 22:14:46,748 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:46] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-08-01 22:14:53,998 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:53] "GET /login HTTP/1.1" 200 -
+2025-08-01 22:14:54,071 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:54] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-01 22:14:54,242 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:54] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-08-01 22:14:58,606 - SmartCourseRegistration - INFO - User Activity: LOGIN_SUCCESS by user cdf7e060-d3ef-444b-aae6-195e86967c48 - Details: {'username': 'admin', 'success': True} | User: cdf7e060-d3ef-444b-aae6-195e86967c48 | Action: LOGIN_SUCCESS
+2025-08-01 22:14:58,607 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:58] "[32mPOST /login HTTP/1.1[0m" 302 -
+2025-08-01 22:14:58,683 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:58] "GET /admin HTTP/1.1" 200 -
+2025-08-01 22:14:59,041 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:59] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-01 22:14:59,041 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:14:59] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
+2025-08-01 22:15:16,207 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:15:16] "GET /admin/course/add HTTP/1.1" 200 -
+2025-08-01 22:15:16,515 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:15:16] "[36mGET /static/css/style.css HTTP/1.1[0m" 304 -
+2025-08-01 22:15:16,545 - werkzeug - INFO - 127.0.0.1 - - [01/Aug/2025 22:15:16] "[36mGET /static/js/main.js HTTP/1.1[0m" 304 -
