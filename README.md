@@ -39,7 +39,7 @@ Seta/
 
 1. **Clone the repository**
    ```bash
-   git clone [<repository-url>](https://github.com/HACK3RRABBIT/Seta)
+   git clone https://github.com/HACK3RRABBIT/Seta
    cd Seta
    ```
 
@@ -165,3 +165,4 @@ Institution: University Name
 
 
 **Note**: This project is designed for educational purposes and demonstrates advanced OOP principles in Python. 
+
